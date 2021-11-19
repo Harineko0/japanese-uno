@@ -1,0 +1,13 @@
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\bin\Debug\netcoreapp3.1\JapaneseUno.exe
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\bin\Debug\netcoreapp3.1\JapaneseUno.deps.json
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\bin\Debug\netcoreapp3.1\JapaneseUno.runtimeconfig.json
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\bin\Debug\netcoreapp3.1\JapaneseUno.runtimeconfig.dev.json
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\bin\Debug\netcoreapp3.1\JapaneseUno.dll
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\bin\Debug\netcoreapp3.1\JapaneseUno.pdb
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\obj\Debug\netcoreapp3.1\JapaneseUno.csprojAssemblyReference.cache
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\obj\Debug\netcoreapp3.1\JapaneseUno.AssemblyInfoInputs.cache
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\obj\Debug\netcoreapp3.1\JapaneseUno.AssemblyInfo.cs
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\obj\Debug\netcoreapp3.1\JapaneseUno.csproj.CoreCompileInputs.cache
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\obj\Debug\netcoreapp3.1\JapaneseUno.dll
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\obj\Debug\netcoreapp3.1\JapaneseUno.pdb
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\obj\Debug\netcoreapp3.1\JapaneseUno.genruntimeconfig.cache
