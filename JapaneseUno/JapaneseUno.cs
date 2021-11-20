@@ -12,7 +12,7 @@ namespace JapaneseUno
             
             var tables = controller.Start(new GameConfig
             {
-                maxCard = 3,
+                maxCard = 6,
                 playerNumber = 2,
             });
 
@@ -20,11 +20,6 @@ namespace JapaneseUno
 
             string path = "C:/Users/hatin/RiderProjects/japanese-uno/";
             exporter.WriteDictionary(path + "export.csv", csvTables);
-            
-            foreach (var table in tables)
-            {
-                Console.WriteLine("------------------------------\n" + table);
-            }
         }
     }
 }
