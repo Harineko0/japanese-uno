@@ -2,7 +2,7 @@
 
 namespace JapaneseUno
 {
-    struct Player
+    public struct Player
     {
         private List<Card> _cards;
         public IReadOnlyList<Card> Cards => _cards;

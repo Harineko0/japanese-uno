@@ -1,15 +1,30 @@
-﻿namespace JapaneseUno
+﻿using System;
+
+namespace JapaneseUno
 {
     class JapaneseUno
     {
         static void Main(string[] args)
         {
             TableController controller = new TableController();
-            controller.Start(new GameConfig
+            TableConverter converter = new TableConverter();
+            FileExporter exporter = new FileExporter();
+            
+            var tables = controller.Start(new GameConfig
             {
                 maxCard = 3,
                 playerNumber = 2,
             });
+
+            var csvTables = converter.ToCSV(tables);
+
+            string path = "C:/Users/hatin/RiderProjects/japanese-uno/";
+            exporter.WriteDictionary(path + "export.csv", csvTables);
+            
+            foreach (var table in tables)
+            {
+                Console.WriteLine("------------------------------\n" + table);
+            }
         }
     }
 }

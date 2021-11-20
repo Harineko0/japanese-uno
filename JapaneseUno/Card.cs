@@ -2,14 +2,14 @@
 
 namespace JapaneseUno
 {
-    struct Card : IComparable
+    public struct Card : IComparable
     {
-        public int number;
-        public int Number => number;
+        private int _number;
+        public int Number => _number;
 
         public Card(int number)
         {
-            this.number = number;
+            this._number = number;
         }
         
         public static bool operator >(Card a, Card b)
@@ -24,14 +24,14 @@ namespace JapaneseUno
 
         public override string ToString()
         {
-            return "" + number;
+            return "" + _number;
         }
 
         public int CompareTo(object? obj)
         {
             if (obj is Card card)
             {
-                return number - card.number;
+                return _number - card._number;
             }
 
             return -1;

@@ -1,19 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace JapaneseUno
 {
 
-    class Table
+    public class Table
     {
-        private List<Player> _players = new List<Player>();
+        private List<Player> _players;
         private Stack<Card> _layout = new Stack<Card>(); // 場札
-
+        private List<Table> _history = new List<Table>();
         public Player Playing => _players[_nextOrder];
-        public int _nextOrder;
-        public int turn;
+        private int _nextOrder;
 
+        public IReadOnlyList<Player> Players => _players;
+        public IReadOnlyCollection<Card> Layout => _layout;
+        public int NextOrder => _nextOrder;
+        public IReadOnlyList<Table> History => _history;
+        public int WinNumber => _players.FindIndex(x => x.Cards.Count == 0);
+        public int Turn => _history.Count - 1;
+        
+        public Table(List<Player> players)
+        {
+            _players = players;
+            _history.Add(this);
+        }
+        
         public override string ToString()
         {
             string logPlayer = "";
@@ -26,25 +37,38 @@ namespace JapaneseUno
                 }
             }
 
-            return "Turn: " + turn + "\nNextOrder: " + _nextOrder + "\nPlayers: " + logPlayer + "\nLayout: " + (_layout.Count == 0 ? "nothing" : _layout.Peek().ToString());
+            return "Turn: " + _history.Count + "\nNextOrder: " + _nextOrder + "\nPlayers: " + logPlayer + "\nLayout: " + (_layout.Count == 0 ? "nothing" : _layout.Peek().ToString());
         }
-
+        
         public bool IsEnd()
         {
             return _players.FindAll(player => player.Cards.Count != 0).Count <= 1;
         }
 
+        public bool IsPassable()
+        {
+            return _layout.Count != 0 && _players.FindAll(player => player.Cards.Max() > _layout.Peek()).Count == 0;
+        }
+
+        public bool CanPlayCard(Card card)
+        {
+            return _layout.Count == 0 || card > _layout.Peek();
+        }
+
         public Table Clone()
         {
-            Table table = new Table();
+            List<Player> players = new List<Player>();
             foreach (var player in _players)
             {
-                table.AddPlayer(new Player(player.Cards.ToList()));
+                players.Add(new Player(player.Cards.ToList()));
             }
-            table._layout = new Stack<Card>(_layout);
-            table._nextOrder = _nextOrder;
-            table.turn = turn;
-            return table;
+
+            return new Table(players)
+            {
+                _layout = new Stack<Card>(_layout),
+                _nextOrder = _nextOrder,
+                _history = new List<Table>(_history)
+            };
         }
 
         public void PlayCard(Card card)
@@ -59,35 +83,19 @@ namespace JapaneseUno
 
         public void Pass()
         {
-            Console.WriteLine("Passed successfully.");
             _layout.Clear();
             NextTurn();
         }
 
-        public bool Passable()
-        {
-            return _layout.Count != 0 && _players.FindAll(player => player.Cards.Max() > _layout.Peek()).Count == 0;
-        }
-
-        public void AddPlayer(Player player)
-        {
-            _players.Add(player);
-        }
-
         private void NextTurn()
         {
-            turn += 1;
             _nextOrder += 1;
             if (_nextOrder > _players.Count - 1)
             {
                 _nextOrder = 0;
             }
-        }
-
-        public bool CanPlayCard(Card card)
-        {
-            return _layout.Count == 0 || card > _layout.Peek();
+            
+            _history.Add(this);
         }
     }
-
 }

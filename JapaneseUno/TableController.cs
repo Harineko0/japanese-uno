@@ -3,11 +3,13 @@ using System.Collections.Generic;
 
 namespace JapaneseUno
 {
-    class TableController
+    public class TableController
     {
-        public void Start(GameConfig config)
+        private List<Table> tables = new List<Table>();
+        
+        public List<Table> Start(GameConfig config)
         {
-            Table table = new Table();
+            List<Player> players = new List<Player>();
             List<Card> cards = new List<Card>();
 
             for (int i = 1; i <= config.maxCard; i++)
@@ -17,26 +19,25 @@ namespace JapaneseUno
 
             for (int i = 0; i < config.playerNumber; i++)
             {
-                table.AddPlayer(new Player(new List<Card>(cards)));
+                players.Add(new Player(new List<Card>(cards)));
             }
             
+            Table table = new Table(players);
+            
             Next(table);
+            return tables;
         }
         
         public void Next(Table table)
         {
-            Console.WriteLine("------------------------------\n" + table);
-            
             if (table.IsEnd())
             {
                 Result(table);
                 return;
             }
 
-            if (table.Passable())
+            if (table.IsPassable())
             {
-                Console.WriteLine("***** Pass!");
-                // パス
                 Table nextTable = table.Clone();
                 nextTable.Pass();
                 Next(nextTable);
@@ -58,7 +59,7 @@ namespace JapaneseUno
 
         private void Result(Table table)
         {
-            Console.WriteLine("------------------------------\nGame Finished.");
+            tables.Add(table);
         }
     }
 }
