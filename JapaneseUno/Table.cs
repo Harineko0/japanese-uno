@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace JapaneseUno
@@ -7,10 +8,10 @@ namespace JapaneseUno
     class Table
     {
         private List<Player> _players = new List<Player>();
-        public Stack<Card> Layout = new Stack<Card>(); // 場札
+        private Stack<Card> _layout = new Stack<Card>(); // 場札
 
-        public Player Playing => _players[_order];
-        public int _order;
+        public Player Playing => _players[_nextOrder];
+        public int _nextOrder;
         public int turn;
 
         public override string ToString()
@@ -25,7 +26,7 @@ namespace JapaneseUno
                 }
             }
 
-            return "Turn: " + turn + "\nLayout: " + (Layout.Count == 0 ? "0" : Layout.Peek().ToString())+ "\nOrder: " + _order + "\nPlayers: " + logPlayer;
+            return "Turn: " + turn + "\nNextOrder: " + _nextOrder + "\nPlayers: " + logPlayer + "\nLayout: " + (_layout.Count == 0 ? "nothing" : _layout.Peek().ToString());
         }
 
         public bool IsEnd()
@@ -40,8 +41,8 @@ namespace JapaneseUno
             {
                 table.AddPlayer(new Player(player.Cards.ToList()));
             }
-            table.Layout = new Stack<Card>(Layout);
-            table._order = _order;
+            table._layout = new Stack<Card>(_layout);
+            table._nextOrder = _nextOrder;
             table.turn = turn;
             return table;
         }
@@ -51,23 +52,21 @@ namespace JapaneseUno
             bool played = Playing.PlayCard(card);
             if (played)
             {
-                Layout.Push(card);
-                ProceedOrder();
+                _layout.Push(card);
+                NextTurn();
             }
         }
 
         public void Pass()
         {
-            if (Passable())
-            {
-                Layout.Clear();
-                ProceedOrder();
-            }
+            Console.WriteLine("Passed successfully.");
+            _layout.Clear();
+            NextTurn();
         }
 
         public bool Passable()
         {
-            return Layout.Count != 0 && _players.FindAll(player => player.Cards.Max() > Layout.Peek()).Count <= 1;
+            return _layout.Count != 0 && _players.FindAll(player => player.Cards.Max() > _layout.Peek()).Count == 0;
         }
 
         public void AddPlayer(Player player)
@@ -75,14 +74,19 @@ namespace JapaneseUno
             _players.Add(player);
         }
 
-        private void ProceedOrder()
+        private void NextTurn()
         {
             turn += 1;
-            _order += 1;
-            if (_order > _players.Count - 1)
+            _nextOrder += 1;
+            if (_nextOrder > _players.Count - 1)
             {
-                _order = 0;
+                _nextOrder = 0;
             }
+        }
+
+        public bool CanPlayCard(Card card)
+        {
+            return _layout.Count == 0 || card > _layout.Peek();
         }
     }
 
