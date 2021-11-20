@@ -10,4 +10,10 @@
       <PackageReference Include="CsvHelper" Version="27.2.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="..\README.md">
+        <Link>README.md</Link>
+      </Content>
+    </ItemGroup>
+
 </Project>
