@@ -47,7 +47,7 @@ namespace JapaneseUno
 
         public bool IsPassable()
         {
-            return _layout.Count != 0 && _players.FindAll(player => player.Cards.Max() > _layout.Peek()).Count == 0;
+            return _layout.Count != 0 && _players.FindAll(player => player.Cards.Count != 0 && player.Cards.Max() > _layout.Peek()).Count == 0;
         }
 
         public bool CanPlayCard(Card card)
