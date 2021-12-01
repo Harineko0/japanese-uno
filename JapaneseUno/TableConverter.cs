@@ -21,7 +21,7 @@ namespace JapaneseUno
                     for (int i = 0; i < history.Players.Count; i++)
                     {
                         var player = history.Players[i];
-                        var cards = player.Cards.Select(card => card.Number);
+                        var cards = player.Cards.Select(card => card.Number + 2);
                         cardsString += string.Join(", ", cards);
                         if (i < history.Players.Count - 1)
                         {

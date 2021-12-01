@@ -4,6 +4,9 @@ namespace JapaneseUno
 {
     class JapaneseUno
     {
+
+		// 52米からスタートしたとき、残り8枚になったタイミングでどちらがかつか、掛け金を2倍にする価値はあるか
+        
         static void Main(string[] args)
         {
             TableController controller = new TableController();
@@ -12,7 +15,7 @@ namespace JapaneseUno
             
             var tables = controller.Start(new GameConfig
             {
-                playerNumber = 3,
+                playerNumber = 2,
                 maxCard = 2,
             });
 

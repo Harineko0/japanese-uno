@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "1nQQuPG1TDGLoIKGzExatsGVWPjn6WfZEKr9HJzIoOWUrRRN7Mvo2nuIHUE4y9Kmg18yVMwISK+ThxmfuXKthA==",
+  "dgSpecHash": "Gdyv+aoXv31V/Ux/y4+hw0089E0JriV//9lO/Dq8v5cmrC2aycRAPQWwTWloH7gKyk4Vhd6G+BdbLyo+FHOeMQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\hatin\\RiderProjects\\japanese-uno\\JapaneseUno\\JapaneseUno.csproj",
+  "projectFilePath": "C:\\Users\\admin\\RiderProjects\\JapaneseUno\\JapaneseUno.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\hatin\\.nuget\\packages\\csvhelper\\27.2.0\\csvhelper.27.2.0.nupkg.sha512",
-    "C:\\Users\\hatin\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
+    "C:\\Users\\admin\\.nuget\\packages\\csvhelper\\27.2.0\\csvhelper.27.2.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.21\\microsoft.netcore.app.host.win-x64.3.1.21.nupkg.sha512"
   ],
   "logs": []
 }
