@@ -24,7 +24,7 @@ namespace JapaneseUno
 
         public override string ToString()
         {
-            return "" + _number;
+            return (_number + 2).ToString();
         }
 
         public int CompareTo(object? obj)
