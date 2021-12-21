@@ -7,13 +7,12 @@ namespace JapaneseUno
     public class Table
     {
         private List<Player> _players;
-        private Stack<Card> _layout = new Stack<Card>(); // 場札
+        public Stack<Card> Layout = new Stack<Card>(); // 場札
         private List<Table> _history = new List<Table>();
         public Player Playing => _players[_nextOrder];
         private int _nextOrder;
 
         public IReadOnlyList<Player> Players => _players;
-        public IReadOnlyCollection<Card> Layout => _layout;
         public int NextOrder => _nextOrder;
         public IReadOnlyList<Table> History => _history;
         public int WinNumber => _players.FindIndex(x => x.Cards.Count == 0);
@@ -37,7 +36,7 @@ namespace JapaneseUno
                 }
             }
 
-            return "Turn: " + _history.Count + "\nNextOrder: " + _nextOrder + "\nPlayers: " + logPlayer + "\nLayout: " + (_layout.Count == 0 ? "nothing" : _layout.Peek().ToString());
+            return "Turn: " + _history.Count + "\nNextOrder: " + _nextOrder + "\nPlayers: " + logPlayer + "\nLayout: " + (Layout.Count == 0 ? "nothing" : Layout.Peek().ToString());
         }
         
         public bool IsEnd()
@@ -47,12 +46,14 @@ namespace JapaneseUno
 
         public bool IsPassable()
         {
-            return _layout.Count != 0 && _players.FindAll(player => player.Cards.Count != 0 && player.Cards.Max() > _layout.Peek()).Count == 0;
+            return Layout.Count != 0 
+                   && _players.FindAll(player => player.Cards.Count != 0 
+                                                 && player.Cards.Max() > Layout.Peek()).Count == 0;
         }
 
         public bool CanPlayCard(Card card)
         {
-            return _layout.Count == 0 || card > _layout.Peek();
+            return Layout.Count == 0 || card > Layout.Peek();
         }
 
         public Table Clone()
@@ -65,7 +66,7 @@ namespace JapaneseUno
 
             return new Table(players)
             {
-                _layout = new Stack<Card>(_layout),
+                Layout = new Stack<Card>(Layout),
                 _nextOrder = _nextOrder,
                 _history = new List<Table>(_history)
             };
@@ -76,15 +77,20 @@ namespace JapaneseUno
             bool played = Playing.PlayCard(card);
             if (played)
             {
-                _layout.Push(card);
+                Layout.Push(card);
                 NextTurn();
             }
         }
 
         public void Pass()
         {
-            _layout.Clear();
-            NextTurn();
+            Layout.Clear();
+            
+            _nextOrder += 1;
+            if (_nextOrder > _players.Count - 1)
+            {
+                _nextOrder = 0;
+            }
         }
 
         private void NextTurn()

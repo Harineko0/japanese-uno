@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace JapaneseUno
@@ -13,15 +14,21 @@ namespace JapaneseUno
             {
                 Dictionary<string, string> dic = new Dictionary<string, string>();
                 dic.Add("Win", (table.WinNumber + 1).ToString());
-                
+                dic.Add("Layout", "");
+                List<Card> layouts = new List<Card>();
+
                 foreach (var history in table.History)
                 {
                     string cardsString = "";
+                    if (history.Layout.Count != 0)
+                    {
+                        layouts.Add(history.Layout.Peek());
+                    }
                     
                     for (int i = 0; i < history.Players.Count; i++)
                     {
                         var player = history.Players[i];
-                        var cards = player.Cards.Select(card => card.Number);
+                        var cards = player.Cards.Select(card => card.Number + 2);
                         cardsString += string.Join(", ", cards);
                         if (i < history.Players.Count - 1)
                         {
@@ -32,6 +39,8 @@ namespace JapaneseUno
                     cardsString.TrimEnd();
                     dic.Add("Turn - " + history.Turn, cardsString);
                 }
+
+                dic["Layout"] = string.Join(", ", layouts);
                 
                 csvTables.Add(dic);
             }
