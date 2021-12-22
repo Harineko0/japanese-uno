@@ -61,5 +61,19 @@ namespace JapaneseUno
         {
             tables.Add(table);
         }
+
+        private bool IsDebug(Table table)
+        {
+            var query = new int[]{3, 4, 6, 4};
+            for (int i = 0; i < table.History.Count; i++)
+            {
+                if (!(i < 5 && query[i] == table.History[i].Layout.Peek().Number))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
