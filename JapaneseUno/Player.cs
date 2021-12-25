@@ -12,9 +12,9 @@ namespace JapaneseUno
             _cards = cards;
         }
         
-        public bool PlayCard(Card card)
+        public void PlayCard(Card card)
         {
-            return _cards.Remove(card);
+            _cards.Remove(card);
         }
     }
 }

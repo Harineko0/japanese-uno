@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\admin\\RiderProjects\\JapaneseUno\\JapaneseUno.csproj": {}
+    "C:\\Users\\hatin\\RiderProjects\\japanese-uno\\JapaneseUno\\JapaneseUno.csproj": {}
   },
   "projects": {
-    "C:\\Users\\admin\\RiderProjects\\JapaneseUno\\JapaneseUno.csproj": {
+    "C:\\Users\\hatin\\RiderProjects\\japanese-uno\\JapaneseUno\\JapaneseUno.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\admin\\RiderProjects\\JapaneseUno\\JapaneseUno.csproj",
+        "projectUniqueName": "C:\\Users\\hatin\\RiderProjects\\japanese-uno\\JapaneseUno\\JapaneseUno.csproj",
         "projectName": "JapaneseUno",
-        "projectPath": "C:\\Users\\admin\\RiderProjects\\JapaneseUno\\JapaneseUno.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\admin\\RiderProjects\\JapaneseUno\\obj\\",
+        "projectPath": "C:\\Users\\hatin\\RiderProjects\\japanese-uno\\JapaneseUno\\JapaneseUno.csproj",
+        "packagesPath": "C:\\Users\\hatin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hatin\\RiderProjects\\japanese-uno\\JapaneseUno\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\hatin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -24,7 +24,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -36,11 +35,10 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "CsvHelper": {
               "target": "Package",
-              "version": "[27.2.0, )"
+              "version": "[27.2.1, )"
             }
           },
           "imports": [
@@ -53,30 +51,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[3.1.10, 3.1.10]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.1.21, 3.1.21]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[3.1.0, 3.1.0]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[3.1.0, 3.1.0]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\admin\\.dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.411\\RuntimeIdentifierGraph.json"
         }
       }
     }

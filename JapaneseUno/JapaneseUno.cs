@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace JapaneseUno
+﻿namespace JapaneseUno
 {
     class JapaneseUno
     {
@@ -23,7 +21,7 @@ namespace JapaneseUno
 
             var csvTables = converter.ToCSV(tables);
 
-            string path = @"C:\Users\admin\RiderProjects\exports\";
+            string path = @"C:\Users\hatin\RiderProjects\japanese-uno\exports\";
             exporter.WriteDictionary(path + config.playerNumber + "_" + config.maxCard + ".csv", csvTables);
             
             // foreach (var table in tables)

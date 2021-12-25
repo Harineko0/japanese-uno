@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace JapaneseUno
@@ -14,6 +15,21 @@ namespace JapaneseUno
 
         public IReadOnlyList<Player> Players => _players;
         public int NextOrder => _nextOrder;
+
+        private int PrevOrder
+        {
+            get
+            {
+                int order = _nextOrder - 1;
+                if (order < 0)
+                {
+                    order = _players.Count - 1;
+                }
+
+                return order;
+            }
+        }
+        
         public IReadOnlyList<Table> History => _history;
         public int WinNumber => _players.FindIndex(x => x.Cards.Count == 0);
         public int Turn => _history.Count - 1;
@@ -36,26 +52,10 @@ namespace JapaneseUno
                 }
             }
 
-            return "Turn: " + _history.Count + "\nNextOrder: " + _nextOrder + "\nPlayers: " + logPlayer + "\nLayout: " + (Layout.Count == 0 ? "nothing" : Layout.Peek().ToString());
+            var layout = Layout.Select(x => x.ToString());
+            return "Turn: " + _history.Count + "\nNextOrder: " + _nextOrder + "\nPlayers: " + logPlayer + "\nLayout: " + string.Join(", ", layout);
         }
         
-        public bool IsEnd()
-        {
-            return _players.FindAll(player => player.Cards.Count != 0).Count <= 1;
-        }
-
-        public bool IsPassable()
-        {
-            return Layout.Count != 0 
-                   && _players.FindAll(player => player.Cards.Count != 0 
-                                                 && player.Cards.Max() > Layout.Peek()).Count == 0;
-        }
-
-        public bool CanPlayCard(Card card)
-        {
-            return Layout.Count == 0 || card > Layout.Peek();
-        }
-
         public Table Clone()
         {
             List<Player> players = new List<Player>();
@@ -72,14 +72,29 @@ namespace JapaneseUno
             };
         }
 
+        public bool IsEnd()
+        {
+            return _players.FindAll(player => player.Cards.Count != 0).Count <= 1;
+        }
+
+        public bool CanPlayCard(Card card)
+        {
+            return Layout.Count == 0 || card > Layout.Peek();
+        }
+
         public void PlayCard(Card card)
         {
-            bool played = Playing.PlayCard(card);
-            if (played)
-            {
-                Layout.Push(card);
-                NextTurn();
-            }
+            Playing.PlayCard(card);
+            Layout.Push(card);
+            NextTurn();
+        }
+
+        public bool CanPass()
+        {
+            return Layout.Count != 0 
+                   && _players.FindAll(player => player.Cards.Count != 0 
+                                                 && _players.IndexOf(player) != PrevOrder
+                                                 && player.Cards.Max() > Layout.Peek()).Count == 0;
         }
 
         public void Pass()
@@ -100,7 +115,6 @@ namespace JapaneseUno
             {
                 _nextOrder = 0;
             }
-            
             _history.Add(this);
         }
     }

@@ -36,10 +36,11 @@ namespace JapaneseUno
                 return;
             }
 
-            if (table.IsPassable())
+            if (table.CanPass())
             {
                 Table nextTable = table.Clone();
                 nextTable.Pass();
+                Console.WriteLine("-- Pass ----------------------------\n" + nextTable);
                 Next(nextTable);
             }
             else
@@ -51,7 +52,15 @@ namespace JapaneseUno
                     {
                         Table nextTable = table.Clone();
                         nextTable.PlayCard(card);
-                        Next(nextTable);
+
+                        Console.WriteLine("-- Play ----------------------------\n" + nextTable);
+                        // Console.WriteLine("======================\n" + nextTable);
+                        // Console.WriteLine(IsDebug(nextTable));
+                        if (IsDebug(nextTable))
+                        {
+                            // Console.WriteLine("------------------------------\n" + nextTable);
+                            Next(nextTable);
+                        }
                     }
                 }   
             }
@@ -64,16 +73,22 @@ namespace JapaneseUno
 
         private bool IsDebug(Table table)
         {
-            var query = new int[]{3, 4, 6, 4};
+            var query = new []{1, 2, 4, 2};
             for (int i = 0; i < table.History.Count; i++)
             {
-                if (!(i < 5 && query[i] == table.History[i].Layout.Peek().Number))
+                var history = table.History[i];
+                if (history.Layout.Count > 0)
                 {
-                    return true;
+                    int layout = history.Layout.Peek().Number;
+                    // Console.WriteLine("[IsDebug] History " + i + " -> Layout = " + layout + ", Query = " + query[i - 1]);
+                    if (i < query.Length && query[i - 1] != layout)
+                    {
+                        return false;
+                    }
                 }
             }
 
-            return false;
+            return true;
         }
     }
 }
