@@ -56,11 +56,12 @@ namespace JapaneseUno
                         Console.WriteLine("-- Play ----------------------------\n" + nextTable);
                         // Console.WriteLine("======================\n" + nextTable);
                         // Console.WriteLine(IsDebug(nextTable));
-                        if (IsDebug(nextTable))
-                        {
-                            // Console.WriteLine("------------------------------\n" + nextTable);
-                            Next(nextTable);
-                        }
+                        // if (IsDebug(nextTable))
+                        // {
+                        //     // Console.WriteLine("------------------------------\n" + nextTable);
+                        //     Next(nextTable);
+                        // }
+                        Next(nextTable);
                     }
                 }   
             }

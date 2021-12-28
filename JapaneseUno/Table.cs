@@ -31,7 +31,7 @@ namespace JapaneseUno
         }
         
         public IReadOnlyList<Table> History => _history;
-        public int WinNumber => _players.FindIndex(x => x.Cards.Count == 0);
+        public int WinNumber = -1;
         public int Turn => _history.Count - 1;
         
         public Table(List<Player> players)
@@ -68,7 +68,8 @@ namespace JapaneseUno
             {
                 Layout = new Stack<Card>(Layout),
                 _nextOrder = _nextOrder,
-                _history = new List<Table>(_history)
+                _history = new List<Table>(_history),
+                WinNumber = WinNumber
             };
         }
 
@@ -115,7 +116,17 @@ namespace JapaneseUno
             {
                 _nextOrder = 0;
             }
+
+            SetWinPlayer();
             _history.Add(this);
+        }
+
+        private void SetWinPlayer()
+        {
+            if (WinNumber == -1)
+            {
+                WinNumber = _players.FindIndex(x => x.Cards.Count == 0);
+            }
         }
     }
 }

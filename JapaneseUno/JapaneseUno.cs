@@ -13,8 +13,8 @@
 
             var config = new GameConfig
             {
-                playerNumber = 2,
-                maxCard = 4,
+                playerNumber = 3,
+                maxCard = 6,
             };
             
             var tables = controller.Start(config);

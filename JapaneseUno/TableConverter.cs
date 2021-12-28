@@ -22,7 +22,9 @@ namespace JapaneseUno
                     string cardsString = "";
                     if (history.Layout.Count != 0)
                     {
-                        layouts.Add(history.Layout.Peek());
+                        var currentLayout = history.Layout.Peek();
+                        layouts.Add(currentLayout);
+                        cardsString += "*" + currentLayout + "\n";
                     }
                     
                     for (int i = 0; i < history.Players.Count; i++)
@@ -32,7 +34,7 @@ namespace JapaneseUno
                         cardsString += string.Join(", ", cards);
                         if (i < history.Players.Count - 1)
                         {
-                            cardsString += " - ";
+                            cardsString += "\n";
                         }
                     }
 
