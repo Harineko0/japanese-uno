@@ -1,48 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
 namespace JapaneseUno
 {
+    public class CsvOptions
+    {
+        public int HistoryLimit = -1;
+    }
+    
     public class TableConverter
     {
-        public List<Dictionary<string, string>> ToCSV(List<Table> tables)
+        public List<Dictionary<string, string>> ToCSV(List<Table> tables, CsvOptions options)
         {
             List<Dictionary<string, string>> csvTables = new List<Dictionary<string, string>>();
             
-            foreach (var table in tables)
+            for (int i = 0; i < tables.Count; i++)
             {
+                var table = tables[i];
                 Dictionary<string, string> dic = new Dictionary<string, string>();
                 dic.Add("Win", (table.WinNumber + 1).ToString());
-                dic.Add("Layout", "");
-                List<Card> layouts = new List<Card>();
+                // dic.Add("Layout", "");
+                // List<Card> layouts = new List<Card>();
 
-                foreach (var history in table.History)
+                int historyLimit = options.HistoryLimit == -1 ? table.History.Count : options.HistoryLimit;
+                
+                for (int j = 0; j < historyLimit; j++)
                 {
-                    string cardsString = "";
+                    var history = table.History[j];
+                    var cardsString = new StringBuilder();
                     if (history.Layout.Count != 0)
                     {
                         var currentLayout = history.Layout.Peek();
-                        layouts.Add(currentLayout);
-                        cardsString += "*" + currentLayout + "\n";
+                        // layouts.Add(currentLayout);
+                        cardsString.Append("[").Append(currentLayout).Append("]\n");
                     }
                     
-                    for (int i = 0; i < history.Players.Count; i++)
+                    for (int k = 0; k < history.Players.Count; k++)
                     {
-                        var player = history.Players[i];
-                        var cards = player.Cards.Select(card => card.Number + 2);
-                        cardsString += string.Join(", ", cards);
-                        if (i < history.Players.Count - 1)
+                        var player = history.Players[k];
+                        cardsString.Append(string.Join(", ", player.Cards));
+                        if (k < history.Players.Count - 1)
                         {
-                            cardsString += "\n";
+                            cardsString.Append("\n");
                         }
                     }
 
-                    cardsString.TrimEnd();
-                    dic.Add("Turn - " + history.Turn, cardsString);
+                    var key = "Turn - " + history.Turn;
+                    if (dic.ContainsKey(key))
+                    {
+                        dic[key] = cardsString.ToString().TrimEnd();
+                    }
+                    else
+                    {
+                        dic.Add("Turn - " + history.Turn, cardsString.ToString().TrimEnd());
+                    }
                 }
 
-                dic["Layout"] = string.Join(", ", layouts);
+                // dic["Layout"] = string.Join(", ", layouts);
                 
                 csvTables.Add(dic);
             }

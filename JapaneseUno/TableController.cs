@@ -23,18 +23,13 @@ namespace JapaneseUno
             }
             
             Table table = new Table(players);
+            // Next(table);
+            SplitProcess(table);
+
+            // Table table2 = table.Clone();
+            // table2.PlayCard(new Card(9));
+            // Next(table2);
             
-            // Parallel.ForEach(cards, card =>
-            // {
-            //     Table nextTable = table.Clone();
-            //     nextTable.PlayCard(card);
-            //
-            //     Console.WriteLine("-- Play ----------------------------\n" + nextTable);
-            //
-            //     Next(nextTable);
-            // });
-            
-            Next(table);
             return tables;
         }
         
@@ -50,34 +45,23 @@ namespace JapaneseUno
             {
                 Table nextTable = table.Clone();
                 nextTable.Pass();
-                Console.WriteLine("-- Pass ----------------------------\n" + nextTable);
+                // Console.WriteLine("-- Pass ----------------------------\n" + nextTable);
                 Next(nextTable);
             }
             else
             {
                 List<Card> cards = new List<Card>(table.Playing.Cards);
-                
-                // Parallel.ForEach(cards, card =>
-                // {
-                //     if (table.CanPlayCard(card))
-                //     {
-                //         Table nextTable = table.Clone();
-                //         nextTable.PlayCard(card);
-                //
-                //         Console.WriteLine("-- Play ----------------------------\n" + nextTable);
-                //
-                //         Next(nextTable);
-                //     }
-                // });
-                
-                foreach (var card in cards)
+
+                for (int i = 0; i < cards.Count; i++)
                 {
+                    var card = cards[i];
+                    
                     if (table.CanPlayCard(card))
                     {
                         Table nextTable = table.Clone();
                         nextTable.PlayCard(card);
-                
-                        Console.WriteLine("-- Play ----------------------------\n" + nextTable);
+                        
+                        // Console.WriteLine("-- Play ----------------------------\n" + nextTable);
                 
                         Next(nextTable);
                     }
@@ -90,9 +74,74 @@ namespace JapaneseUno
             tables.Add(table);
         }
 
+        private void SplitProcess(Table _table)
+        {
+            for (int cardNum = 9; cardNum <= 9; cardNum++)
+            {
+                var analyzer = new TableAnalyzer();
+
+                var firstCard = new Card(cardNum);
+                Table table = _table.Clone();
+                table.PlayCard(firstCard);
+
+                if (table.CanPass())
+                {
+                    Table nextTable = table.Clone();
+                    nextTable.Pass();
+
+                    List<Card> cards = new List<Card>(nextTable.Playing.Cards);
+
+                    for (int i = 0; i < cards.Count; i++)
+                    {
+                        var card = cards[i];
+
+                        if (nextTable.CanPlayCard(card))
+                        {
+                            Table afterNextTable = nextTable.Clone();
+                            afterNextTable.PlayCard(card);
+                            Next(afterNextTable);
+                        }
+
+                        if (tables.Count > 0)
+                        {
+                            Console.WriteLine(firstCard.Number + "_" + (i + 1));
+                            analyzer.Analyze(tables);
+                            tables.Clear();
+                        }
+                    }
+
+                }
+                else
+                {
+                    List<Card> cards = new List<Card>(table.Playing.Cards);
+
+                    for (int i = 0; i < cards.Count; i++)
+                    {
+                        var card = cards[i];
+
+                        if (table.CanPlayCard(card))
+                        {
+                            Table nextTable = table.Clone();
+                            nextTable.PlayCard(card);
+                            Next(nextTable);
+                        }
+
+                        if (tables.Count > 0)
+                        {
+                            Console.WriteLine(firstCard.Number + "_" + (i + 1));
+                            analyzer.Analyze(tables);
+                            tables.Clear();
+                        }
+                    }
+                }
+
+                Console.WriteLine("TrialsSum: " + analyzer.trialsSum + ", FirstWinSum: " + analyzer.firstWinTimesSum + "\n---------------------------------");
+            }
+        }
+
         private bool IsDebug(Table table)
         {
-            var query = new []{1, 2, 4, 2};
+            var query = new []{3};
             for (int i = 0; i < table.History.Count; i++)
             {
                 var history = table.History[i];

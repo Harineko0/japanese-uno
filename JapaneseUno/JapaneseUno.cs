@@ -9,14 +9,15 @@ namespace JapaneseUno
         
         static void Main(string[] args)
         {
-            TableController controller = new TableController();
-            TableConverter converter = new TableConverter();
-            FileExporter exporter = new FileExporter();
+            var controller = new TableController();
+            var converter = new TableConverter();
+            var exporter = new FileExporter();
+            var analyzer = new TableAnalyzer();
 
             var config = new GameConfig
             {
                 playerNumber = 2,
-                maxCard = 4,
+                maxCard = 9,
             };
             
             var sw = new System.Diagnostics.Stopwatch();
@@ -28,20 +29,17 @@ namespace JapaneseUno
             TimeSpan ts = sw.Elapsed;
             Console.WriteLine($"　{ts.Hours}時間 {ts.Minutes}分 {ts.Seconds}秒 {ts.Milliseconds}ミリ秒");
 
-            var csvTables = converter.ToCSV(tables);
-
-            string path = @"C:\Users\hatin\RiderProjects\japanese-uno\exports\";
-            exporter.WriteDictionary(path + config.playerNumber + "_" + config.maxCard + ".csv", csvTables);
+            // analyzer.Analyze(tables);
             
-            // foreach (var table in tables)
+            // Console.WriteLine("Converting table to csv...");
+            // var csvTables = converter.ToCSV(tables, new CsvOptions
             // {
-            //     foreach (var history in table.History)
-            //     {
-            //         Console.WriteLine("------------------------------\n" + history);
-            //     }
-            //     Console.WriteLine("------------------------------\n" + table);
-            //     Console.WriteLine("==============================\n");
-            // }
+            //     HistoryLimit = -1,
+            // });
+            //
+            // Console.WriteLine("Writing to file...");
+            // string path = @"C:\Users\hatin\RiderProjects\japanese-uno\exports\";
+            // exporter.WriteDictionary(path + config.playerNumber + "_" + config.maxCard + ".csv", csvTables, false);
         }
     }
 }
