@@ -24,11 +24,21 @@ namespace JapaneseUno
             
             Table table = new Table(players);
             
+            // Parallel.ForEach(cards, card =>
+            // {
+            //     Table nextTable = table.Clone();
+            //     nextTable.PlayCard(card);
+            //
+            //     Console.WriteLine("-- Play ----------------------------\n" + nextTable);
+            //
+            //     Next(nextTable);
+            // });
+            
             Next(table);
             return tables;
         }
         
-        public void Next(Table table)
+        private void Next(Table table)
         {
             if (table.IsEnd())
             {
@@ -46,21 +56,29 @@ namespace JapaneseUno
             else
             {
                 List<Card> cards = new List<Card>(table.Playing.Cards);
+                
+                // Parallel.ForEach(cards, card =>
+                // {
+                //     if (table.CanPlayCard(card))
+                //     {
+                //         Table nextTable = table.Clone();
+                //         nextTable.PlayCard(card);
+                //
+                //         Console.WriteLine("-- Play ----------------------------\n" + nextTable);
+                //
+                //         Next(nextTable);
+                //     }
+                // });
+                
                 foreach (var card in cards)
                 {
                     if (table.CanPlayCard(card))
                     {
                         Table nextTable = table.Clone();
                         nextTable.PlayCard(card);
-
+                
                         Console.WriteLine("-- Play ----------------------------\n" + nextTable);
-                        // Console.WriteLine("======================\n" + nextTable);
-                        // Console.WriteLine(IsDebug(nextTable));
-                        // if (IsDebug(nextTable))
-                        // {
-                        //     // Console.WriteLine("------------------------------\n" + nextTable);
-                        //     Next(nextTable);
-                        // }
+                
                         Next(nextTable);
                     }
                 }   

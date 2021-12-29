@@ -2,9 +2,9 @@
 
 namespace JapaneseUno
 {
-    public struct Card : IComparable
+    public readonly struct Card : IComparable
     {
-        private int _number;
+        private readonly int _number;
         public int Number => _number;
 
         public Card(int number)

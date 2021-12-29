@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace JapaneseUno
 {
@@ -42,18 +43,32 @@ namespace JapaneseUno
         
         public override string ToString()
         {
-            string logPlayer = "";
+            var playerString = new StringBuilder("");
             foreach (var player in _players)
             {
-                logPlayer += "\n" + _players.IndexOf(player) + "; ";
+                playerString
+                    .Append("\n")
+                    .Append(_players.IndexOf(player))
+                    .Append("; ");
+                
                 foreach (var card in player.Cards)
                 {
-                    logPlayer += card + ", ";
+                    playerString
+                        .Append(card)
+                        .Append(", ");
                 }
             }
 
             var layout = Layout.Select(x => x.ToString());
-            return "Turn: " + _history.Count + "\nNextOrder: " + _nextOrder + "\nPlayers: " + logPlayer + "\nLayout: " + string.Join(", ", layout);
+
+            return new StringBuilder("Turn: ")
+                .Append(_history.Count)
+                .Append("\nNextOrder: ")
+                .Append(_nextOrder)
+                .Append("\nPlayers: ")
+                .Append(playerString)
+                .Append("\nLayout: ")
+                .Append(string.Join(", ", layout)).ToString();
         }
         
         public Table Clone()

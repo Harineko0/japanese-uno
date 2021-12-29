@@ -1,4 +1,6 @@
-﻿namespace JapaneseUno
+﻿using System;
+
+namespace JapaneseUno
 {
     class JapaneseUno
     {
@@ -13,11 +15,18 @@
 
             var config = new GameConfig
             {
-                playerNumber = 3,
-                maxCard = 6,
+                playerNumber = 2,
+                maxCard = 4,
             };
             
+            var sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
+            
             var tables = controller.Start(config);
+
+            sw.Stop();
+            TimeSpan ts = sw.Elapsed;
+            Console.WriteLine($"　{ts.Hours}時間 {ts.Minutes}分 {ts.Seconds}秒 {ts.Milliseconds}ミリ秒");
 
             var csvTables = converter.ToCSV(tables);
 
