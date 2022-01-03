@@ -76,7 +76,7 @@ namespace JapaneseUno
 
         private void SplitProcess(Table _table)
         {
-            for (int cardNum = 9; cardNum <= 9; cardNum++)
+            for (int cardNum = 1; cardNum <= 5; cardNum++)
             {
                 var analyzer = new TableAnalyzer();
 

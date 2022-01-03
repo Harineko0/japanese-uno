@@ -17,7 +17,7 @@ namespace JapaneseUno
             var config = new GameConfig
             {
                 playerNumber = 2,
-                maxCard = 9,
+                maxCard = 5,
             };
             
             var sw = new System.Diagnostics.Stopwatch();
