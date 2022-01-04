@@ -17,7 +17,7 @@ namespace JapaneseUno
             var config = new GameConfig
             {
                 playerNumber = 2,
-                maxCard = 9,
+                maxCard = 10,
             };
             
             var sw = new System.Diagnostics.Stopwatch();
@@ -29,10 +29,6 @@ namespace JapaneseUno
             sw.Stop();
             TimeSpan ts = sw.Elapsed;
             Console.WriteLine($"　{ts.Hours}時間 {ts.Minutes}分 {ts.Seconds}秒 {ts.Milliseconds}ミリ秒");
-
-            int trials = results.Count;
-            int firstWin = results.Count(result => result.WinPlayer == 0);
-            NLogService.Debug("Trials: " + trials + ", First Win: " + firstWin);
 
             // analyzer.Analyze(tables);
 

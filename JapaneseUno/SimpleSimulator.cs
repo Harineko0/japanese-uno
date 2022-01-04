@@ -64,9 +64,15 @@ namespace JapaneseUno
                     playedPlayers[order].Remove(card);
                     var result =
                         NextGame(playedPlayers, new List<int>{card}, NextOrder(order, playersCount), turn + 1);
-                    for (int j = 0; j < result.Count; j++)
+
+                    if (turn == 0)
                     {
-                        results.Add(result[j]);
+                        NLogService.Debug("Card: " + i);
+                        GameResult.Analyze(result);
+                    }
+                    else
+                    {
+                        results.AddRange(result);
                     }
                 }
             }
@@ -139,6 +145,21 @@ namespace JapaneseUno
         public override string ToString()
         {
             return "WinPlayer: " + WinPlayer;
+        }
+
+        public static void Analyze(List<GameResult> results)
+        {
+            int resultsCount = results.Count;
+            int firstWin = 0;
+            for (int i = 0; i < resultsCount; i++)
+            {
+                var result = results[i];
+                if (result.WinPlayer == 0)
+                {
+                    firstWin++;
+                }
+            }
+            NLogService.Debug("Trials: " + resultsCount + ", First Win: " + firstWin);
         }
     }
 }
