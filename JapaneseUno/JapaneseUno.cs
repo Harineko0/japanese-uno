@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace JapaneseUno
 {
@@ -8,16 +7,16 @@ namespace JapaneseUno
         // 52米からスタートしたとき、残り8枚になったタイミングでどちらがかつか、掛け金を2倍にする価値はあるか
         static void Main(string[] args)
         {
-            var controller = new TableController();
-            var converter = new TableConverter();
-            var exporter = new FileExporter();
-            var analyzer = new TableAnalyzer();
+            // var controller = new TableController();
+            // var converter = new TableConverter();
+            // var exporter = new FileExporter();
+            // var analyzer = new TableAnalyzer();
             var simulator = new SimpleSimulator();
 
             var config = new GameConfig
             {
-                playerNumber = 2,
-                maxCard = 10,
+                playerNumber = 3,
+                maxCard = 7,
             };
             
             var sw = new System.Diagnostics.Stopwatch();
@@ -29,6 +28,8 @@ namespace JapaneseUno
             sw.Stop();
             TimeSpan ts = sw.Elapsed;
             Console.WriteLine($"　{ts.Hours}時間 {ts.Minutes}分 {ts.Seconds}秒 {ts.Milliseconds}ミリ秒");
+            
+            GameResult.Analyze(results);
 
             // analyzer.Analyze(tables);
 

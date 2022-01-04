@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace JapaneseUno
 {
@@ -49,7 +50,7 @@ namespace JapaneseUno
             if (!emptyLayout && canPass)
             {
                 // NLogService.Debug("Pass");
-                return NextGame(players, new List<int>(), NextOrder(order, playersCount), turn);
+                return NextGame(players, new List<int>(), PrevOrder(order, playersCount), turn);
             }
 
             var results = new List<GameResult>();
@@ -62,18 +63,23 @@ namespace JapaneseUno
                 {
                     var playedPlayers = DeepCopy(players);
                     playedPlayers[order].Remove(card);
+                 
+                    // NLogService.Debug("Play: " + card + ", Players: " + string.Join(", ", playedPlayers.Select(player => string.Join("-", player))));
+                    
                     var result =
                         NextGame(playedPlayers, new List<int>{card}, NextOrder(order, playersCount), turn + 1);
 
-                    if (turn == 0)
-                    {
-                        NLogService.Debug("Card: " + i);
-                        GameResult.Analyze(result);
-                    }
-                    else
-                    {
-                        results.AddRange(result);
-                    }
+                    // if (turn == 0)
+                    // {
+                    //     NLogService.Debug("Card: " + i);
+                    //     GameResult.Analyze(result);
+                    // }
+                    // else
+                    // {
+                    //     results.AddRange(result);
+                    // }
+                    
+                    results.AddRange(result);
                 }
             }
 
@@ -96,7 +102,7 @@ namespace JapaneseUno
         {
             int next = order + 1;
 
-            if (next >= count)
+            if (next > count - 1)
             {
                 next = 0;
             }
@@ -150,16 +156,21 @@ namespace JapaneseUno
         public static void Analyze(List<GameResult> results)
         {
             int resultsCount = results.Count;
-            int firstWin = 0;
+            var playersWin = new int[]{0, 0, 0};
             for (int i = 0; i < resultsCount; i++)
             {
                 var result = results[i];
                 if (result.WinPlayer == 0)
                 {
-                    firstWin++;
+                    playersWin[0]++;
+                }
+                else if (result.WinPlayer == 1)
+                {
+                    playersWin[1]++;
                 }
             }
-            NLogService.Debug("Trials: " + resultsCount + ", First Win: " + firstWin);
+
+            NLogService.Debug("Trials: " + resultsCount + ", First Win: " + playersWin[0] + ", Second Win: " + playersWin[1]);
         }
     }
 }
