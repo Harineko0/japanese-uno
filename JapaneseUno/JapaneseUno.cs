@@ -1,36 +1,41 @@
 ﻿using System;
+using System.Linq;
 
 namespace JapaneseUno
 {
     class JapaneseUno
     {
-
-		// 52米からスタートしたとき、残り8枚になったタイミングでどちらがかつか、掛け金を2倍にする価値はあるか
-        
+        // 52米からスタートしたとき、残り8枚になったタイミングでどちらがかつか、掛け金を2倍にする価値はあるか
         static void Main(string[] args)
         {
             var controller = new TableController();
             var converter = new TableConverter();
             var exporter = new FileExporter();
             var analyzer = new TableAnalyzer();
+            var simulator = new SimpleSimulator();
 
             var config = new GameConfig
             {
                 playerNumber = 2,
-                maxCard = 5,
+                maxCard = 9,
             };
             
             var sw = new System.Diagnostics.Stopwatch();
             sw.Start();
             
-            var tables = controller.Start(config);
+            // var tables = controller.Start(config);
+            var results = simulator.StartGame(config);
 
             sw.Stop();
             TimeSpan ts = sw.Elapsed;
             Console.WriteLine($"　{ts.Hours}時間 {ts.Minutes}分 {ts.Seconds}秒 {ts.Milliseconds}ミリ秒");
 
+            int trials = results.Count;
+            int firstWin = results.Count(result => result.WinPlayer == 0);
+            NLogService.Debug("Trials: " + trials + ", First Win: " + firstWin);
+
             // analyzer.Analyze(tables);
-            
+
             // Console.WriteLine("Converting table to csv...");
             // var csvTables = converter.ToCSV(tables, new CsvOptions
             // {

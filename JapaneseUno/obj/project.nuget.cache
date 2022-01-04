@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Y5Era039MG/FWQnIwf8ZPog4hgxDvSs970+/bPPwDABMbx7wie50PweLixOHrR7FiQefZHcfNrOLhbFkbIywDA==",
+  "dgSpecHash": "OoxI6+63w29klVlREwwqa1Gg2wzBEh/Pgr8lQ6891nBkbfy7QFBvHNURaDaoThNZcY6KZUzFQBipG44lVKOhVw==",
   "success": true,
   "projectFilePath": "C:\\Users\\hatin\\RiderProjects\\japanese-uno\\JapaneseUno\\JapaneseUno.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,9 @@
     "C:\\Users\\hatin\\.nuget\\packages\\microsoft.csharp\\4.3.0\\microsoft.csharp.4.3.0.nupkg.sha512",
     "C:\\Users\\hatin\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\hatin\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\hatin\\.nuget\\packages\\nlog\\5.0.0-rc1\\nlog.5.0.0-rc1.nupkg.sha512",
+    "C:\\Users\\hatin\\.nuget\\packages\\nlog.config\\4.7.13\\nlog.config.4.7.13.nupkg.sha512",
+    "C:\\Users\\hatin\\.nuget\\packages\\nlog.schema\\4.7.13\\nlog.schema.4.7.13.nupkg.sha512",
     "C:\\Users\\hatin\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\hatin\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
     "C:\\Users\\hatin\\.nuget\\packages\\system.dynamic.runtime\\4.3.0\\system.dynamic.runtime.4.3.0.nupkg.sha512",

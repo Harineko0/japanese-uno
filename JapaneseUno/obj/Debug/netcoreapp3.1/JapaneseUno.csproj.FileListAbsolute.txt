@@ -13,3 +13,5 @@ C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\obj\Debug\netcoreapp3.1\Ja
 C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\obj\Debug\netcoreapp3.1\JapaneseUno.genruntimeconfig.cache
 C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\bin\Debug\netcoreapp3.1\CsvHelper.dll
 C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\obj\Debug\netcoreapp3.1\JapaneseUno.csproj.CopyComplete
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\bin\Debug\netcoreapp3.1\NLog.config
+C:\Users\hatin\RiderProjects\japanese-uno\JapaneseUno\bin\Debug\netcoreapp3.1\NLog.dll

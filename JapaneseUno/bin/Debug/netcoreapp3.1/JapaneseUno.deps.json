@@ -8,7 +8,9 @@
     ".NETCoreApp,Version=v3.1": {
       "JapaneseUno/1.0.0": {
         "dependencies": {
-          "CsvHelper": "27.2.1"
+          "CsvHelper": "27.2.1",
+          "NLog": "5.0.0-rc1",
+          "NLog.Config": "4.7.13"
         },
         "runtime": {
           "JapaneseUno.dll": {}
@@ -47,6 +49,21 @@
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
+      "NLog/5.0.0-rc1": {
+        "runtime": {
+          "lib/netstandard2.0/NLog.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.0.539"
+          }
+        }
+      },
+      "NLog.Config/4.7.13": {
+        "dependencies": {
+          "NLog": "5.0.0-rc1",
+          "NLog.Schema": "4.7.13"
+        }
+      },
+      "NLog.Schema/4.7.13": {},
       "System.Collections/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -282,6 +299,27 @@
       "sha512": "sha512-aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
+    },
+    "NLog/5.0.0-rc1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+ce3zuXplax1HLxFieqA7BwxLjdmZacYblz6AcfrqxfFWytMz9SHBwUas45aamVrQhTKUA4m5la464/RxnCZPg==",
+      "path": "nlog/5.0.0-rc1",
+      "hashPath": "nlog.5.0.0-rc1.nupkg.sha512"
+    },
+    "NLog.Config/4.7.13": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A7i8bS0SLd7A1y9BkyOBpIdfC91aqzJfOfHXi9xXs12s6rb9f2xYRQde2Pcpso+YrcybCR2lqczNdb/pKSqoEg==",
+      "path": "nlog.config/4.7.13",
+      "hashPath": "nlog.config.4.7.13.nupkg.sha512"
+    },
+    "NLog.Schema/4.7.13": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IlbHsTRzA1YeAbrJTVETZRWkYXqo5YnaF/ppJBdE6kKD4/IjuA0CUaZMSQKbOLzwxGARMx3An1V38zjGEjRekA==",
+      "path": "nlog.schema/4.7.13",
+      "hashPath": "nlog.schema.4.7.13.nupkg.sha512"
     },
     "System.Collections/4.3.0": {
       "type": "package",
